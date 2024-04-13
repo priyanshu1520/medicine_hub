@@ -35,7 +35,7 @@ route.post('/login',async(req,res)=>{
         if(!username||!password){
             return res.status(400).json({error:'username and password are required' });
         }
-        const user=await User.findOne({username:username})
+        const user=await User.findOne({name:username})
         if(!user||!(await user.comparePassword(password))){
             return res.status(401).json({error:"invalid data"})
         }
