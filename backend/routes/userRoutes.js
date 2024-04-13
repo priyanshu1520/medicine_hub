@@ -51,49 +51,6 @@ route.post('/login',async(req,res)=>{
     }       
 })
 
-
-route.put('/profile/password',jwtAuthMiddleware,async(req,res)=>{
-    try{
-        const userId=req.user.id;
-        const {currentPassword,newPassword}=req.body;
-        if (!currentPassword||!newPassword) {
-            return res.status(400).json({error:'Both currentPassword and newPassword are required' });
-        }
-        const user=await User.findById(userId);
-        if(!user||!(await user.comparePassword(currentPassword))){
-            return res.status(401).json({error:"invalid data"})
-        }
-        user.password=newPassword;
-        user.save();
-        console.log("password updated");
-        res.status(200).json({message:"password updated"});
-    }catch(err){
-        console.log(err)
-        res.status(500).json({err:"internal server error"})
-    }
-})
-
-
-route.put('/profile/role',jwtAuthMiddleware,async(req,res)=>{
-    try{
-        const userId=req.user.id;
-        const {newRole}=req.body;
-        if (!newRole) {
-            return res.status(400).json({error:'newRole are required' });
-        }
-        const user=await User.findById(userId);
-        user.role=newRole;
-        user.save();
-        console.log("role updated");
-        res.status(200).json({message:"role updated"});
-    }catch(err){
-        console.log(err)
-        res.status(500).json({err:"internal server error"})
-    }
-})
-
-
-
 route.get('/profile',jwtAuthMiddleware,async(req,res)=>{
     try{
         const userData=req.user

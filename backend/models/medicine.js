@@ -9,10 +9,6 @@ const medicineSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    salt: {
-        type: String,
-        required: true
-    },
     quantity: {
         type: Number,
         required: true
@@ -21,10 +17,11 @@ const medicineSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    email: {
-        type: String,
-        required: true
+    address: {
+        type :String,
+        required :true
     }
+
 });
 
 const Medicine = mongoose.model('medicine', medicineSchema);

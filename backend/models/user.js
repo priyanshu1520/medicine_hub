@@ -23,12 +23,7 @@ const userSchema=new mongoose.Schema({
     password:{
         type:String,
         require:true
-    },
-    role:{
-        type:String,
-        enum:['Buyer','Doner'],
-        default:'Buyer'
-    },
+    }
 });
 
 
@@ -55,8 +50,5 @@ userSchema.methods.comparePassword=async function(password){
         res.status(500).json({error:"internal server error"});
     }
 }
-
-
-
 const User=mongoose.model('User',userSchema);
 module.exports=User;
