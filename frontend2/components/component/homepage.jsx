@@ -23,12 +23,25 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
+
+"use client"
+
 import Link from "next/link"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { Label } from "../ui/label"
+import { Input } from "../ui/input"
+import { Button } from "../ui/button"
+import { use, useState } from "react"
+import axios from "axios"
+
 
 export function Homepage() {
+
+  const [username , setUsername] = useState("") ;
+  const [password , setPassword] = useState("") ;
+  const [email , setEmail] = useState("") ;
+  const [mobile , setMobile] = useState("") ;
+  const [name , setName] = useState("") ;
+
   return (
     (<div
       className="grid min-h-screen items-start gap-10 lg:grid-cols-2 lg:items-center">
@@ -104,25 +117,45 @@ export function Homepage() {
             <h1 className="text-3xl font-bold">Create an account</h1>
             <p className="text-gray-500 dark:text-gray-400">
               Already have an account?
-              <Link className="underline" href="#">
+              <Link className="underline" href="/signin">
                 Sign in
               </Link>
             </p>
           </div>
           <div className="space-y-4">
             <div className="space-y-2">
+            <div className="space-y-2">
+              <Label htmlFor="name">Name</Label>
+              <Input onChange={e => setName(e.target.value)} id="name" required type="text" />
+            </div>
               <Label htmlFor="username">Username</Label>
-              <Input id="username" required />
+              <Input onChange = {e => setUsername(e.target.value)}  id="username" required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" placeholder="m@example.com" required type="email" />
+              <Input onChange={e => setEmail(e.target.value)} id="email" placeholder="m@example.com" required type="email" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
-              <Input id="password" required type="password" />
+              <Input onChange={e => setPassword(e.target.value)} id="password" required type="password" />
             </div>
-            <Button className="w-full" type="submit">
+            <div className="space-y-2">
+              <Label htmlFor="mobile">Mobile</Label>
+              <Input onChange={e => setMobile(e.target.value)} id="mobile" required type="text" />
+            </div>
+            
+
+            <Button onClick = {async () =>{
+              const {token} = await axios.post('http://localhost:3000/user/signup' , {
+                  name ,
+                  email ,
+                  password ,
+                  mobile ,
+                  username
+              })
+              localStorage.setItem("token" , token);
+              window.location.href="/home"
+            }} className="w-full" type="submit">
               Sign up
             </Button>
           </div>
