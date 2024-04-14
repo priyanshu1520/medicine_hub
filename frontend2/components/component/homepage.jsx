@@ -47,30 +47,21 @@ export function Homepage() {
       className="grid min-h-screen items-start gap-10 lg:grid-cols-2 lg:items-center">
       <div className="p-6 space-y-6 lg:p-10 lg:space-y-10">
         <nav className="flex items-center space-x-4">
-          <img
-            alt="Logo"
-            className="rounded-full"
-            height="40"
-            src="/placeholder.svg"
-            style={{
-              aspectRatio: "40/40",
-              objectFit: "cover",
-            }}
-            width="40" />
+          
           <div className="hidden text-2xl font-bold lg:block">
             <Link className="font-bold" href="#">
-              Healthcare
+              Medicine Hub
             </Link>
           </div>
           <div className="space-x-2 ml-auto lg:space-x-4">
             <Link
               className="rounded-lg px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-gray-800"
-              href="#">
+              href="http://localhost:5173/home/add">
               Donate
             </Link>
             <Link
               className="rounded-lg px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-gray-800"
-              href="#">
+              href="http://localhost:5173/home">
               Buy
             </Link>
           </div>
@@ -99,12 +90,12 @@ export function Homepage() {
           <div className="space-x-4">
             <Link
               className="inline-block rounded-lg px-6 py-3 text-lg font-medium bg-gray-900 text-gray-100 shadcn:scale"
-              href="#">
+              href="http://localhost:5173/home/add">
               Donate
             </Link>
             <Link
               className="inline-block rounded-lg px-6 py-3 text-lg font-medium bg-gray-900 text-gray-100 shadcn:scale"
-              href="#">
+              href="http://localhost:5173/home">
               Buy Medicines
             </Link>
           </div>
